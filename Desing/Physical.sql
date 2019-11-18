@@ -1,26 +1,25 @@
-CREATE TABLE bookingCustomer(
+CREATE TABLE rentalCustomer(
     custID  NUMBER(10) PRIMARY KEY,
     name    VARCHAR2(60),
     DOB     DATE,
-    Address VARCHAR2(200),
-    agentID NUMBER(10) REFERENCES agent(agentID)
+    Address VARCHAR2(200)
 );
 
-CREATE TABLE manufacturer(
+CREATE TABLE rentalManufacturer(
     makeID      NUMBER(10) PRIMARY KEY,
     location    NUMBER(10)
 );
 
 
-
-CREATE TABLE car(
+CREATE TABLE rentalCar(
     carID       NUMBER(10) PRIMARY KEY ,
-    makeID      NUMBER(10) REFERENCES manufacturer(makeID),
+    makeID      NUMBER(10) REFERENCES rentalManufacturer(makeID),
     model       VARCHAR2(20),
-    location    VARCHAR2(50)
+    location    VARCHAR2(50),
+    available   CHAR(1) DEFAULT 'Y' CHECK(available IN('Y','N'))  
 );
 
-CREATE TABLE agent(
+CREATE TABLE rentalAgent(
     agentID     NUMBER(10) PRIMARY KEY,
     name        VARCHAR2(60),
     address     VARCHAR2(200),
@@ -29,11 +28,11 @@ CREATE TABLE agent(
 );
 
 
-CREATE TABLE booking(
+CREATE TABLE rentalBooking(
     bookingID   NUMBER(10) PRIMARY KEY,
-    custID      NUMBER(10) REFERENCES bookingCustomer(custID),
-    carID       NUMBER(10) REFERENCES car(carID),
-    agentID     NUMBER(10) REFERENCES agent(agentID),
+    custID      NUMBER(10) REFERENCES rentalCustomer(custID),
+    carID       NUMBER(10) REFERENCES rentalCar(carID),
+    agentID     NUMBER(10) REFERENCES rentalAgent(agentID),
     dateRented  DATE,
     dateDue     DATE    
 );
