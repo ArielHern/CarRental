@@ -1,3 +1,4 @@
+--car rental
 CREATE TABLE rentalCustomer(
     custID  NUMBER(10) PRIMARY KEY,
     name    VARCHAR2(60),
@@ -5,18 +6,13 @@ CREATE TABLE rentalCustomer(
     Address VARCHAR2(200)
 );
 
-CREATE TABLE rentalManufacturer(
-    makeID      NUMBER(10) PRIMARY KEY,
-    location    NUMBER(10)
-);
-
-
 CREATE TABLE rentalCar(
-    carID       NUMBER(10) PRIMARY KEY ,
-    makeID      NUMBER(10) REFERENCES rentalManufacturer(makeID),
-    model       VARCHAR2(20),
-    location    VARCHAR2(50),
-    available   CHAR(1) DEFAULT 'Y' CHECK(available IN('Y','N'))  
+    carID           NUMBER(10) PRIMARY KEY ,
+    manufacturer    VARCHAR2(20),
+    year            DATE,
+    model           VARCHAR2(20),
+    location        VARCHAR2(50),
+    available       CHAR(1) DEFAULT 'Y' CHECK(available IN('Y','N'))  
 );
 
 CREATE TABLE rentalAgent(
