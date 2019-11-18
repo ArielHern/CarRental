@@ -1,4 +1,5 @@
 --car rental
+
 CREATE TABLE rentalCustomer(
     custID  NUMBER(10) PRIMARY KEY,
     name    VARCHAR2(60),
@@ -9,7 +10,7 @@ CREATE TABLE rentalCustomer(
 CREATE TABLE rentalCar(
     carID           NUMBER(10) PRIMARY KEY ,
     manufacturer    VARCHAR2(20),
-    year            DATE,
+    year            NUMBER(4),
     model           VARCHAR2(20),
     location        VARCHAR2(50),
     available       CHAR(1) DEFAULT 'Y' CHECK(available IN('Y','N'))  
